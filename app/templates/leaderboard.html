@@ -9,8 +9,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/leaderboard.css') }}" rel="stylesheet">
+    <!-- ◇ 新增：Hamburgers & Phosphor Icons（与首页一致） -->
+    <link href="https://cdn.jsdelivr.net/npm/hamburgers@1.2.1/dist/hamburgers.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web/src/regular/style.css" rel="stylesheet">
+    <style>
+</style>
+
 </head>
 <body>
+    <!-- ===== 右上汉堡按钮 ===== -->
+<div class="menuBtn">
+    <button class="hamburger hamburger--spring" id="hamburger" aria-label="menu" type="button">
+      <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+    </button>
+  </div>
+  
+  <!-- ===== 侧栏（与首页相同链接） ===== -->
+  <aside id="sidebar">
+    <div class="glass" id="glass"></div>
+    <div class="panel">
+      <h2>LLM Explorer</h2>
+      <nav class="menu">
+        <a href="/"><i class="ph ph-house"></i> 首页</a>
+        <a href="/leaderboard"><i class="ph ph-trophy"></i> 排行榜</a>
+        <a href="/dashboard"><i class="ph ph-gauge"></i> 生态大屏</a>
+        <a href="/news"><i class="ph ph-newspaper"></i> 最新资讯</a>
+      </nav>
+    </div>
+  </aside>
+
+
     <section class="upper">
     <!-- Header -->
     <header class="header">
@@ -21,7 +49,7 @@
             </div>
             <div class="actions"> <!-- 新增社交媒体图标 -->
                 <a href="{{ url_for('dashboard_bp.dashboard') }}" class="icon" target="_blank"><img src="{{ url_for('static', filename='logo/dashboard.svg') }}" style="height: 50px;width: 50px;"></img></a>
-                <a href="https://github.com/zzsyppt/llm-eco-viz" class="icon" target="_blank"><img src="{{ url_for('static', filename='logo/github-mark.svg') }}" style="height: 50px;width: 50px;"></img></a>
+                <a href="https://github.com/zzsyppt/llm-eco-viz-polished" class="icon" target="_blank"><img src="{{ url_for('static', filename='logo/github-mark.svg') }}" style="height: 50px;width: 50px;"></img></a>
             </div>
         </div>
     </header> 
@@ -263,9 +291,26 @@
     <!-- Footer -->
     <div class="footer">
         <!--<img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo">-->
-        <span class="slogan">由不醒人室团队制作</span>
+        <span class="slogan">by @zzsyppt</span>
     </div>
 
     <script src="{{ url_for('static', filename='js/leaderboard.js') }}"></script>
+<!-- ◇ 新增：侧栏切换脚本（轻量） -->
+<script>
+    (function(){
+      const menuBtn = document.getElementById('hamburger');
+      const sidebar = document.getElementById('sidebar');
+      const glass   = document.getElementById('glass');
+  
+      function toggleMenu(open){
+        const show = open ?? !sidebar.classList.contains('active');
+        sidebar.classList.toggle('active', show);
+        menuBtn.classList.toggle('is-active', show);
+      }
+      menuBtn.addEventListener('click', () => toggleMenu());
+      glass && glass.addEventListener('click', () => toggleMenu(false));
+      window.addEventListener('keydown', e => { if(e.key==='Escape') toggleMenu(false); });
+    })();
+  </script>
 </body>
 </html>

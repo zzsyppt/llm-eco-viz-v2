@@ -1,6 +1,6 @@
 avatars
 node_modules
-*.docx
+*.doc
 __pycache__
 BACKUP
 package*

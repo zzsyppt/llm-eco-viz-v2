@@ -8,6 +8,11 @@
     <!-- 引入Google Fonts和必要的库 -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
+    <!-- ◇ 新增：Hamburgers & Phosphor Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/hamburgers@1.2.1/dist/hamburgers.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web/src/regular/style.css" rel="stylesheet">
+
+
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
@@ -24,10 +29,32 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
     
     <style>
-        /* 在这里可以添加一些页面特定的样式，如果需要的话 */
-    </style>
+        </style>
+        
 </head>
 <body>
+
+    <!-- ===== 右上汉堡按钮 ===== -->
+<div class="menuBtn">
+    <button class="hamburger hamburger--spring" id="hamburger" aria-label="menu" type="button">
+      <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+    </button>
+  </div>
+  
+  <!-- ===== 侧栏（同上） ===== -->
+  <aside id="sidebar">
+    <div class="glass" id="glass"></div>
+    <div class="panel">
+      <h2>LLM Explorer</h2>
+      <nav class="menu">
+        <a href="/"><i class="ph ph-house"></i> 首页</a>
+        <a href="/leaderboard"><i class="ph ph-trophy"></i> 排行榜</a>
+        <a href="/dashboard"><i class="ph ph-gauge"></i> 生态大屏</a>
+        <a href="/news"><i class="ph ph-newspaper"></i> 最新资讯</a>
+      </nav>
+    </div>
+  </aside>
+  
     <header class="header">
         <h1>大模型开源洞察大屏</h1>
     </header>
@@ -175,5 +202,22 @@
     
     <!-- 引入自定义JavaScript -->
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <!-- ◇ 新增：侧栏切换脚本 -->
+<script>
+    (function(){
+      const menuBtn = document.getElementById('hamburger');
+      const sidebar = document.getElementById('sidebar');
+      const glass   = document.getElementById('glass');
+  
+      function toggleMenu(open){
+        const show = open ?? !sidebar.classList.contains('active');
+        sidebar.classList.toggle('active', show);
+        menuBtn.classList.toggle('is-active', show);
+      }
+      menuBtn.addEventListener('click', () => toggleMenu());
+      glass && glass.addEventListener('click', () => toggleMenu(false));
+      window.addEventListener('keydown', e => { if(e.key==='Escape') toggleMenu(false); });
+    })();
+  </script>
 </body>
 </html>
