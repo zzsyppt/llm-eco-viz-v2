@@ -1,0 +1,7 @@
+avatars
+node_modules
+*.docx
+__pycache__
+BACKUP
+package*
+output_tmp

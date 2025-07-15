@@ -1,0 +1,82 @@
+/* —— 变量与主题（保持不变） —— */
+:root{
+  --bg:#0d0d0d;          --bg-light:#f5f5f7;
+  --card:#1a1a1a;        --card-light:#ffffff;
+  --txt:#fff;            --txt-light:#212121;
+  --gray:#a0a0a0;        --gray-light:#6b6b6b;
+  --accent-grad:linear-gradient(135deg,#3b82f6 0%,#a855f7 100%);
+}
+body.light{--bg:var(--bg-light);--card:var(--card-light);--txt:var(--txt-light);--gray:var(--gray-light)}
+
+/* —— Reset —— */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif;color:var(--txt);background:var(--bg);scroll-behavior:smooth}
+a{color:inherit;text-decoration:none}button{border:none;background:none;color:inherit;cursor:pointer}
+
+/* —— 顶栏 —— */
+.nav{position:sticky;top:0;z-index:30;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(0,0,0,.3);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.05)}
+.brand{font:700 1.4rem/1 'Orbitron',sans-serif}
+.accent{background:var(--accent-grad);-webkit-background-clip:text;color:transparent}
+.icon{width:22px;height:22px;fill:currentColor}
+.nav-actions{display:flex;align-items:center;gap:1.6rem;margin-right:4rem}   /* 距汉堡 4rem */
+.circle-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:background .25s,transform .25s}
+.circle-btn:hover{background:rgba(255,255,255,.08)}.circle-btn:active{transform:scale(.9)}
+
+/* —— 汉堡按钮 —— */
+.menuBtn{position:fixed;top:1rem;right:1rem;z-index:10000}
+.hamburger-inner,.hamburger-inner::before,.hamburger-inner::after{background:#fff;width:30px;height:3px}
+.hamburger.is-active .hamburger-inner,.hamburger.is-active .hamburger-inner::before,.hamburger.is-active .hamburger-inner::after{background:#0ff}
+
+/* —— 侧栏 —— */
+#sidebar{position:fixed;inset:0;display:flex;pointer-events:none;opacity:0;transition:opacity .4s ease;z-index:9999}
+#sidebar.active{opacity:1;pointer-events:auto}
+#sidebar .glass{flex:1;backdrop-filter:blur(10px) brightness(.8);background:rgba(0,0,0,.3);transition:opacity .4s;opacity:0;cursor:pointer}
+#sidebar.active .glass{opacity:1}
+#sidebar .panel{width:min(420px,85vw);max-width:440px;padding:7rem 2.8rem 4rem;background:rgba(12,12,12,.88);backdrop-filter:blur(14px) saturate(110%);border-left:1px solid rgba(255,255,255,.08);box-shadow:-4px 0 24px rgba(0,0,0,.35);transform:translateX(100%);transition:transform .55s cubic-bezier(.22,.61,.36,1);display:flex;flex-direction:column;gap:3.2rem;position:relative}
+#sidebar.active .panel{transform:translateX(0)}
+.panel::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(#0ff,#ff5bfd,#fff700)}
+.panel h2{font:800 2.4rem/1 'Bebas Neue',sans-serif;margin:0;color:#fff}
+nav.menu{display:flex;flex-direction:column;gap:2.6rem}
+nav.menu a{display:flex;align-items:center;gap:1rem;font:700 2rem/1 'Bebas Neue',sans-serif;color:#fff;position:relative;overflow:hidden;text-decoration:none;transition:color .25s,transform .25s}
+nav.menu a i{font-size:1.3em;transition:transform .25s}
+nav.menu a:hover{transform:translateX(8px);color:#0ff}nav.menu a:hover i{transform:translateX(2px) rotate(8deg)}
+nav.menu a::before{content:"";position:absolute;top:0;left:-120%;width:120%;height:100%;background:linear-gradient(120deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.5) 50%,rgba(255,255,255,0) 100%);transform:skewX(-20deg)}
+nav.menu a:hover::before{animation:shine .6s forwards}@keyframes shine{to{left:120%}}
+nav.menu a::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:3px;background:linear-gradient(90deg,#0ff,#ff5bfd,#fff700);transform:translateX(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+nav.menu a:hover::after{transform:translateX(0)}
+@media(prefers-color-scheme:light){
+  #sidebar .panel{background:rgba(250,250,250,.9);color:#111}
+  .hamburger-inner,.hamburger-inner::before,.hamburger-inner::after{background:#111}
+  .panel::before{opacity:.75}nav.menu a{color:#111}
+}
+
+/* —— Hero —— */
+.hero{min-height:68vh;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.05) 0%,transparent 70%);animation:bgmove 16s linear infinite}
+@keyframes bgmove{0%{background-position:0 0}100%{background-position:400% 0}}
+.hero-inner{max-width:720px;padding:0 1.5rem}
+.hero h1{font-size:clamp(2.8rem,6vw,4rem);line-height:1.15;font-weight:800;margin-bottom:1.2rem;font-family:'Orbitron',sans-serif}
+.hero p{font-size:1.1rem;color:var(--gray);margin-bottom:2rem}
+.cta{padding:.75rem 1.8rem;border-radius:9999px;font-weight:600;background:var(--accent-grad);color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:transform .3s}.cta:hover{transform:translateY(-2px)}
+
+/* —— Grid —— */
+#news-grid{width:100%;max-width:1440px;margin:3rem auto 4rem;display:grid;gap:2rem;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));padding:0 1.5rem}
+
+/* —— Card —— */
+.card{background:var(--card);border-radius:18px;overflow:hidden;position:relative;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.4,0,.3,1)}
+.card::before{content:"";position:absolute;inset:0;background:rgba(255,255,255,.06);backdrop-filter:blur(30px);opacity:0;transition:opacity .3s}
+.card:hover{transform:translateY(-6px)}.card:hover::before{opacity:1}
+.thumb{display:block;position:relative;isolation:isolate}
+.thumb img{width:100%;height:200px;object-fit:cover;transition:transform .8s}.card:hover .thumb img{transform:scale(1.08)}
+.ripple{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.15) 10%,transparent 11%);background-size:100% 100%;opacity:0;pointer-events:none}
+.thumb:active .ripple{opacity:1;animation:ripple .6s forwards}@keyframes ripple{to{background-size:400% 400%;opacity:0}}
+.content{padding:1.1rem 1.3rem 1.6rem;display:flex;flex-direction:column;gap:.8rem}
+.title{font-size:1.1rem;font-weight:600;line-height:1.4}
+.meta{font-size:.75rem;color:var(--gray)}
+.summary{font-size:.9rem;line-height:1.55;color:var(--gray)}
+.hidden{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.show{opacity:1;transform:none}
+
+/* —— Footer —— */
+.footer{text-align:center;padding:4rem 0 2rem;color:var(--gray);font-size:.8rem}
+@media(max-width:480px){.thumb img{height:160px}}
+@keyframes spin{to{transform:rotate(360deg)}}.spin .icon{animation:spin .8s linear infinite}

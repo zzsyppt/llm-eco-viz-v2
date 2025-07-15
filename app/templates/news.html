@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>LLM News | Explorer</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/hamburgers@1.2.1/dist/hamburgers.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web/src/regular/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+</head>
+<body>
+
+<!-- 汉堡 -->
+<div class="menuBtn">
+  <button class="hamburger hamburger--spring" id="hamburger" aria-label="menu">
+    <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+  </button>
+</div>
+
+<!-- 侧栏 -->
+<aside id="sidebar">
+  <div class="glass" id="glass"></div>
+  <div class="panel">
+    <h2>LLM Explorer</h2>
+    <nav class="menu">
+      <a href="/"><i class="ph ph-house"></i> 首页</a>
+      <a href="/leaderboard"><i class="ph ph-trophy"></i> 排行榜</a>
+      <a href="/dashboard"><i class="ph ph-gauge"></i> 仪表盘</a>
+      <a href="/news"><i class="ph ph-newspaper"></i> 最新资讯</a>
+    </nav>
+  </div>
+</aside>
+
+<!-- 顶栏 -->
+<header class="nav glass">
+  <div class="brand">LLM<span class="accent">News</span></div>
+  <div class="nav-actions">
+    <button id="change-batch" class="circle-btn" aria-label="换一批">
+      <svg class="icon"><use href="#refresh"></use></svg>
+    </button>
+    <button id="theme-toggle" class="circle-btn" aria-label="切换主题">
+      <svg class="icon"><use href="#sun"></use></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>大模型<br/>每日速递</h1>
+    <p>Stay ahead with the freshest breakthroughs<br/>in Generative&nbsp;AI &amp; Foundation Models.</p>
+    <button class="cta" onclick="document.getElementById('news-grid').scrollIntoView({behavior:'smooth'})">
+      浏览资讯
+    </button>
+  </div>
+</section>
+
+<!-- News Grid -->
+<main id="news-grid">
+  {% for art in articles %}
+    <article class="card hidden">
+      <a class="thumb" href="{{ art.url }}" target="_blank" rel="noopener">
+        <img src="{{ art.img }}" alt="{{ art.title }}" loading="lazy">
+        <span class="ripple"></span>
+      </a>
+      <div class="content">
+        <h2 class="title"><a href="{{ art.url }}" target="_blank" rel="noopener">{{ art.title }}</a></h2>
+        <p class="meta">{{ art.provider }} · {{ art.time }}</p>
+        <p class="summary">{{ art.summary }}</p>
+      </div>
+    </article>
+  {% endfor %}
+</main>
+
+<footer class="footer"><span>&copy; {{ year }} LLM Explorer</span></footer>
+
+<!-- SVG Icons -->
+<svg style="display:none">
+  <symbol id="sun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 100-12 6 6 0 000 12zm0 4v-2m0-16V2m8 10h2M2 12H4m14.95 5.05l1.414 1.414M3.636 4.636l1.414 1.414m0 12.9l-1.414 1.414M19.364 4.636l-1.414 1.414"/></symbol>
+  <symbol id="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></symbol>
+  <symbol id="refresh" viewBox="0 0 24 24"><path d="M12 5V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6a6 6 0 01-5.65-4H5.08a8 8 0 007.42 6 8 8 0 000-16z"/></symbol>
+</svg>
+
+<script src="{{ url_for('static', filename='js/news.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+2025-07-15 09:48:51,094 [INFO] 待爬取 14020 个对象，批量并发 5
+2025-07-15 09:51:17,259 [INFO] 待爬取 14020 个对象，批量并发 3
+2025-07-15 09:56:06,451 [INFO] 待爬取 14020 个对象，批量并发 3
+2025-07-15 09:58:55,511 [INFO] 待爬取 14020 个对象，批量并发 3
+2025-07-15 09:59:55,509 [WARNING] [FAILED ] 007Marlon2000 — error: 
+2025-07-15 09:59:55,510 [WARNING] [FAILED ] 01PrathamS — error: 
+2025-07-15 09:59:55,510 [WARNING] [FAILED ] 01choco — error: 
+2025-07-15 09:59:55,510 [WARNING] [FAILED ] 0208suin — error: 
+2025-07-15 09:59:55,510 [WARNING] [FAILED ] 03838382john — error: 
+2025-07-15 09:59:55,691 [INFO] 已完成 5/14020
+2025-07-15 10:02:31,698 [INFO] 待爬取 14020 个对象，批量并发 3
+2025-07-15 10:02:51,741 [WARNING] [FAILED ] 007Marlon2000 — error: TimeoutError - 
+2025-07-15 10:02:51,741 [WARNING] [FAILED ] 01PrathamS — error: TimeoutError - 
+2025-07-15 10:02:51,742 [WARNING] [FAILED ] 01choco — error: TimeoutError - 
+2025-07-15 10:02:51,742 [WARNING] [FAILED ] 0208suin — error: TimeoutError - 
+2025-07-15 10:02:51,742 [WARNING] [FAILED ] 03838382john — error: TimeoutError - 
+2025-07-15 10:02:51,907 [INFO] 已完成 5/14020
+2025-07-15 10:03:11,071 [INFO] 待爬取 14020 个对象，批量并发 3
+2025-07-15 10:03:31,070 [WARNING] [FAILED ] 007Marlon2000 — error: TimeoutError - 
+2025-07-15 10:03:31,071 [WARNING] [FAILED ] 01PrathamS — error: TimeoutError - 
+2025-07-15 10:03:31,071 [WARNING] [FAILED ] 01choco — error: TimeoutError - 
+2025-07-15 10:03:31,071 [WARNING] [FAILED ] 0208suin — error: TimeoutError - 
+2025-07-15 10:03:31,071 [WARNING] [FAILED ] 03838382john — error: TimeoutError - 
+2025-07-15 10:03:31,250 [INFO] 已完成 5/14020
+2025-07-15 10:04:00,125 [INFO] 待爬取 14020 个对象，批量并发 3
+2025-07-15 10:04:20,151 [WARNING] [FAILED ] 007Marlon2000 — error: TimeoutError - 
+2025-07-15 10:04:20,151 [WARNING] [FAILED ] 01PrathamS — error: TimeoutError - 
+2025-07-15 10:04:20,151 [WARNING] [FAILED ] 01choco — error: TimeoutError - 
+2025-07-15 10:04:20,152 [WARNING] [FAILED ] 0208suin — error: TimeoutError - 
+2025-07-15 10:04:20,152 [WARNING] [FAILED ] 03838382john — error: TimeoutError - 
+2025-07-15 10:04:20,316 [INFO] 已完成 5/14020
+2025-07-15 10:04:31,228 [INFO] 待爬取 14020 个对象，批量并发 3
+2025-07-15 10:05:31,241 [WARNING] [FAILED ] 007Marlon2000 — error: TimeoutError - 
+2025-07-15 10:05:31,242 [WARNING] [FAILED ] 01PrathamS — error: TimeoutError - 
+2025-07-15 10:05:31,242 [WARNING] [FAILED ] 01choco — error: TimeoutError - 
+2025-07-15 10:05:31,242 [WARNING] [FAILED ] 0208suin — error: TimeoutError - 
+2025-07-15 10:05:31,242 [WARNING] [FAILED ] 03838382john — error: TimeoutError - 
+2025-07-15 10:05:31,394 [INFO] 已完成 5/14020

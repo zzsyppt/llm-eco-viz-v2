@@ -1,0 +1,547 @@
+/* leaderboard.css */
+:root {
+    /* Material Design Color Palette */
+    --primary-color: #1976d2; /* 蓝色 */
+    --secondary-color: #dc004e; /* 粉色 */
+    --background-color: #f5f5f5; /* 浅灰色背景 */
+    --surface-color: linear-gradient(135deg, #e8f0fe, #ffffff);/* 白色 */
+    --text-primary: #212121; /* 深灰色 */
+    --text-secondary: #757575; /* 中灰色 */
+    --border-radius: 8px; /* 圆角 */
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影 */
+}
+
+/* 基本样式 */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #e8f0fe, #ffffff);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    padding-bottom: 100px; /* 确保内容不被footer遮挡 */
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #e8f0fe, #ffffff);
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header .logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.header .actions a {
+    margin: 0 10px;
+    color: var(--text-primary);
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.header .actions a:hover {
+    color: var(--primary-color);
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #e8f0fe, #ffffff);
+}
+
+.welcome-section h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.welcome-section .highlight {
+    color: var(--primary-color);
+}
+
+.welcome-section p {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+/* 筛选和重置排序表单样式 */
+.filter-form {
+    width: 90%;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--surface-color);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filter-form label {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.filter-form select {
+    padding: 8px 12px;
+    border: 1px solid var(--text-secondary);
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-form select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.5);
+}
+
+
+/* 搜索组样式 */
+.search-group {
+    position: relative; /* 为绝对定位的自动补全容器提供参考 */
+    display: flex;
+    align-items: center;
+}
+
+#searchInput {
+    padding: 8px 12px;
+    border: 1px solid var(--text-secondary);
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    width: 200px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.5);
+}
+
+.search-button {
+    padding: 8px 12px;
+    border: 1px solid var(--primary-color);
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #115293;
+}
+
+/* 重置排序按钮样式 */
+.reset-sort a {
+    padding: 8px 12px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.reset-sort a:hover {
+    background-color: #c51162;
+}
+
+/* 分页控件和跳转表单容器 */
+.pagination-container {
+    width: 90%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* 分页控件样式 */
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination a, .pagination span {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.pagination .active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+}
+
+.pagination .disabled {
+    color: var(--text-secondary);
+    pointer-events: none;
+    border-color: var(--text-secondary);
+}
+
+/* 跳转到指定页数样式 */
+.jump-to-page {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.jump-to-page input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid var(--text-secondary);
+    border-radius: 4px;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.jump-to-page input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.5);
+}
+
+.jump-to-page button {
+    padding: 8px 12px;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.jump-to-page button:hover {
+    background-color: #115293;
+}
+
+/* 分页信息样式 */
+.pagination-info {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Footer 样式 */
+.footer {
+    width: 100%;
+    padding: 20px 0;
+    background-color: var(--surface-color);
+    text-align: center;
+    color: var(--text-secondary);
+    position: static;
+    margin-top: 40px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer img {
+    height: 40px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.footer .slogan {
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .filter-form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pagination-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .jump-to-page {
+        margin-top: 10px;
+    }
+
+    .footer {
+        margin-top: 20px;
+    }
+}
+
+/* 科技感表格设计 */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: var(--surface-color);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+}
+
+th i {
+    margin-left: 5px;
+    font-size: 0.8em;
+    vertical-align: middle;
+}
+
+th a {
+    color: #ffffff;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+th a:hover {
+    color: #bbdefb;
+}
+
+.active-sort {
+    color: #ffcc00; /* 高亮当前排序列的图标颜色 */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #e3f2fd;
+    transform: scale(1.01);
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 改进链接按钮 */
+a.fas.fa-network-wired {
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+a.fas.fa-network-wired:hover {
+    color: #ad1457;
+}
+
+/* 排行榜图标列样式 */
+.node-icon {
+    width: 30px; /* 设置图标宽度 */
+    height: 30px; /* 设置图标高度 */
+    object-fit: cover; /* 保持图标比例不变 */
+    border-radius: 50%; /* 圆形图标 */
+    border: 1px solid #ddd; /* 细边框 */
+}
+
+/* 新增选择框样式 */
+th input[type="checkbox"],
+td input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary-color); /* 选择框颜色 */
+}
+
+/* 按钮容器整体样式 */
+.button-container {
+    display: flex;
+    justify-content: space-evenly; /* 左右分布 */
+    align-items: center; /* 垂直居中 */
+    width: 90%; /* 根据需要调整宽度 */
+    margin: 20px auto;
+    gap: 20px; /* 按钮之间的间距 */
+}
+
+/* 多模型网络展示按钮样式 */
+#multiNetworkButton {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#multiNetworkButton:hover {
+    background-color: #115293;
+}
+
+/* TOPK容器样式 */
+.topk-container {
+    margin-top: 20px;
+}
+
+/* TOPK组容器样式，包裹所有元素并添加绿色边框 */
+.topk-group {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--secondary-color); /* 粉色边框 */
+    border-radius: 4px; /* 圆角 */
+    overflow: hidden; /* 确保子元素的圆角不超出 */
+    max-width: 300px; /* 根据需要调整宽度 */
+}
+
+/* TOP标签样式 */
+.topk-label {
+    padding: 10px 15px;
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--secondary-color);
+}
+
+/* 输入框样式 */
+.topk-group input {
+    width: 40px;
+    padding: 10px;
+    border: none; /* 移除默认边框 */
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* 模型展示按钮样式 */
+.topk-group button {
+    padding: 9.5px 10px;
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border-left: 1px solid var(--secondary-color);
+}
+
+.topk-group button:hover {
+    background-color: #ad1457;
+}
+
+
+/* 设置表格列宽 */
+table th:nth-child(1), table td:nth-child(1) { /* 选择框列 */
+    width: 50px;
+    text-align: center;
+}
+
+table th:nth-child(2), table td:nth-child(2) { /* 排名列 */
+    width: 50px;
+    text-align: center;
+}
+
+table th:nth-child(3), table td:nth-child(3) { /* 图标列 */
+    width: 60px;
+    text-align: center;
+}
+
+table th:nth-child(4), table td:nth-child(4) { /* 名称列 */
+    width: 200px;
+}
+
+table th:nth-child(5), table td:nth-child(5) { /* 创建时间列 */
+    width: 100px;
+}
+
+table th:nth-child(6), table td:nth-child(6) { /* 下载次数列 */
+    width: 100px;
+    text-align: center;
+}
+
+table th:nth-child(7), table td:nth-child(7) { /* 点赞数列 */
+    width: 80px;
+    text-align: center;
+}
+
+table th:nth-child(8), table td:nth-child(8) { /* 任务类型列 */
+    width: 150px;
+}
+
+table th:nth-child(9), table td:nth-child(9) { /* 影响力列 */
+    width: 100px;
+    text-align: center;
+}
+
+table th:nth-child(10), table td:nth-child(10) { /* 网络列 */
+    width: 150px;
+    text-align: center;
+}

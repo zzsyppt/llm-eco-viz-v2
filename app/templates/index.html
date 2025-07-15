@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>LLM Explorer</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- Google Fonts & Icons CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/hamburgers@1.2.1/dist/hamburgers.min.css"   rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web/src/regular/style.css">
+
+  <!-- 本地样式 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+
+<!-- ===== 右上汉堡按钮 ===== -->
+<div class="menuBtn">
+  <button class="hamburger hamburger--spring" id="hamburger" aria-label="menu" type="button">
+    <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+  </button>
+</div>
+
+<!-- ===== 侧栏 ===== -->
+<aside id="sidebar">
+  <div class="glass" id="glass"></div>
+  <div class="panel">
+    <h2>LLM Explorer</h2>
+    <nav class="menu">
+      <a href="/"><i class="ph ph-house"></i> 首页</a>
+      <a href="/leaderboard"><i class="ph ph-trophy"></i> 排行榜</a>
+      <a href="/dashboard"><i class="ph ph-gauge"></i> 仪表盘</a>
+      <a href="/news"><i class="ph ph-newspaper"></i> 最新资讯</a>
+    </nav>
+  </div>
+</aside>
+
+<!-- ───────── SECTION 0 ───────── -->
+<section class="screen hero" id="screen0">
+  <h1>探索开源大模型生态</h1>
+  <p>Mapping the LLM Ecosystem from Hugging Face</p>
+  <div class="down"></div>
+</section>
+
+<!-- ───────── BLACKOUT 1 ───────── -->
+<section class="screen blackout" id="black"></section>
+
+<!-- ───────── SECTION 1 ───────── -->
+<section class="screen sectionH" id="screen1">
+  <video id="bgVideo" class="bgVideo"
+         src="{{ url_for('static', filename='media/bg2.mp4') }}"
+         muted playsinline preload="auto" loop></video>
+  <div class="heading">本站点提供：排行榜 · 仪表盘 · LLM 新闻</div>
+
+  <div class="scroller" id="scroller">
+    <a class="card" href="/leaderboard">
+      <img src="{{ url_for('static', filename='media/u2.png') }}" alt="">
+      <div class="info"><h3>🏆 Leaderboard</h3><p>实时影响力排名</p></div>
+    </a>
+
+    <a class="card" href="/dashboard">
+      <img src="{{ url_for('static', filename='media/u12.png') }}" alt="">
+      <div class="info"><h3>📊 Dashboard</h3><p>生态全景数据</p></div>
+    </a>
+
+    <a class="card" href="/news">
+      <img src="{{ url_for('static', filename='media/u3.png') }}" alt="">
+      <div class="info"><h3>📰 LLM News</h3><p>开源模型最新动态</p></div>
+    </a>
+  </div>
+</section>
+
+<!-- ───────── BLACKOUT 2 ───────── -->
+<section class="screen blackout" id="black2"></section>
+
+<!-- ───────── SECTION 2 ‒ NEW GIF 屏 ───────── -->
+<section class="screen sectionMid" id="screen2Mid">
+  <!-- 透明 GIF 叠在全黑背景之上 -->
+  <img id="bgGif" class="bgGif"
+       src="{{ url_for('static', filename='media/bg4.gif') }}"
+       alt="bg4 animation">
+  <div class="midLine" id="midLine">
+    2023年，ChatGPT走入大众眼球，AI大模型时代开启
+  </div>
+</section>
+
+<!-- ───────── BLACKOUT 3 ───────── -->
+<section class="screen blackout" id="black3"></section>
+
+<!-- ───────── SECTION 3 ───────── -->
+<section class="screen section3" id="screen3">
+  <video id="bgVideo3" class="bgVideo3"
+         src="{{ url_for('static', filename='media/bg3.mp4') }}"
+         muted playsinline preload="auto" loop></video>
+
+  <div class="heroLine" id="heroLine">
+    2025年初，随着 DeepSeek 横空出世，AI 大模型已与中国国民息息相关
+  </div>
+</section>
+
+<!-- ───────── END SCREEN ───────── -->
+<section class="screen after" id="screen2">
+  <div class="ending">
+    用我们的站点来了解、洞察 AI 大模型<br>感谢浏览！&nbsp;&copy;&nbsp;{{ year }}
+  </div>
+</section>
+
+<!-- 主脚本 -->
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+/* ========== 固定右上汉堡（白→青） ========== */
+.menuBtn{
+    position:fixed; top:1.6rem; right:1.6rem; z-index:10000;
+  }
+  .hamburger-inner,.hamburger-inner::before,.hamburger-inner::after{
+    background:#fff;width:30px;height:3px
+  }
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after{
+    background:#0ff
+  }
+  
+  /* ========== 新侧栏容器 ========== */
+  #sidebar{
+    position:fixed; inset:0; display:flex; pointer-events:none;
+    opacity:0; transition:opacity .4s ease; z-index:9999;
+  }
+  #sidebar.active{opacity:1; pointer-events:auto}
+  
+  /* 半透明玻璃幕布 */
+  #sidebar .glass{
+    flex:1; backdrop-filter:blur(10px) brightness(.8);
+    background:rgba(0,0,0,.3); transition:opacity .4s;
+    opacity:0; cursor:pointer;
+  }
+  #sidebar.active .glass{opacity:1}
+  
+  /* 右侧面板 */
+  #sidebar .panel{
+    width:min(420px,85vw); max-width:440px; padding:7rem 2.8rem 4rem;
+    background:rgba(12,12,12,.88);
+    backdrop-filter:blur(14px) saturate(110%);
+    border-left:1px solid rgba(255,255,255,.08);
+    box-shadow:-4px 0 24px rgba(0,0,0,.35);
+    transform:translateX(100%);
+    transition:transform .55s cubic-bezier(.22,.61,.36,1);
+    display:flex; flex-direction:column; gap:3.2rem;
+  }
+  #sidebar.active .panel{transform:translateX(0)}
+  
+  /* 渐变竖条装饰 */
+  .panel::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:linear-gradient(#0ff,#ff5bfd,#fff700);
+  }
+  
+  /* LOGO 或标题 */
+  .panel h2{
+    font:800 2.4rem/1 'Bebas Neue',sans-serif;
+    letter-spacing:.5px; color:#fff; margin:0;
+  }
+  
+  /* ========== 导航列表 ========== */
+  nav.menu{
+    display:flex; flex-direction:column; gap:2.6rem;
+  }
+  nav.menu a{
+    display:flex; align-items:center; gap:1rem;
+    text-decoration:none; color:#fff;
+    font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,3vw,3rem);
+    position:relative; overflow:hidden;
+  }
+  nav.menu a i{font-size:1.3em}
+  
+  /* 霓虹下划线滑块 */
+  nav.menu a::after{
+    content:""; position:absolute; left:0; bottom:-4px; width:100%; height:3px;
+    background:linear-gradient(90deg,#0ff,#ff5bfd,#fff700);
+    transform:translateX(-100%); transition:transform .4s cubic-bezier(.4,0,.2,1);
+  }
+  nav.menu a:hover::after,
+  nav.menu a:focus-visible::after{ transform:translateX(0) }
+  
+  /* 适配亮色系统主题 */
+  @media (prefers-color-scheme:light){
+    #sidebar .panel{background:rgba(250,250,250,.9);color:#111}
+    .hamburger-inner,.hamburger-inner::before,.hamburger-inner::after{background:#111}
+    .panel::before{opacity:.75}
+    nav.menu a{color:#111}
+  }
+  
+  /* ── 强化 hover 动效 ────────────────────────── */
+  
+  /* 主链接：加位移 + 斜向闪光 + 轻微霓虹 */
+  nav.menu a{
+    transition:color .25s, transform .25s;          /* 多属性过渡 */
+  }
+  nav.menu a:hover{
+    transform:translateX(8px);                      /* 整项向右滑 8px */
+    color:#0ff;                                     /* 文字变青色 */
+  }
+  
+  /* 图标一起微晃 */
+  nav.menu a i{transition:transform .25s}
+  nav.menu a:hover i{transform:translateX(2px) rotate(8deg)}
+  
+  /* 斜向光条：利用 ::before + animation */
+  nav.menu a::before{
+    content:""; position:absolute; top:0; left:-120%;
+    width:120%; height:100%; pointer-events:none;
+    background:linear-gradient(120deg,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,.5) 50%,
+                rgba(255,255,255,0) 100%);
+    transform:skewX(-20deg);                        /* 倾斜一点更科幻 */
+  }
+  nav.menu a:hover::before{
+    animation:shine 0.6s forwards;                  /* 触发一次扫光 */
+  }
+  @keyframes shine{
+    to{ left:120%; }                                /* 从左滑到右 */
+  }
+  
+  
+  
+  
+  /* —— 基础 —— */
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow-x:hidden;font-family:'Segoe UI',sans-serif;background:#000}
+  
+  /* —— 固定全屏层 —— */
+  .screen{position:fixed;inset:0;opacity:0;transition:opacity .8s ease;pointer-events:none}
+  .screen.active{opacity:1;pointer-events:auto}
+  .blackout{z-index:4;background:#000}
+  
+  /* —— 首屏 —— */
+  .hero{z-index:3;height:100vh;overflow:hidden;background:url("../media/bg1.jpeg") center/cover no-repeat fixed;
+        display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff;
+        animation:heroZoom 25s ease-in-out infinite alternate}
+  .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .hero h1{font-family:'Orbitron',sans-serif;font-weight:800;font-size:clamp(2.8rem,6vw,6.5rem);
+           letter-spacing:.5px;text-shadow:0 0 12px rgba(0,255,255,.6),0 0 24px rgba(0,255,255,.35);
+           animation:fadeSlide .8s .2s both}
+  .hero p{font-size:clamp(1.1rem,2vw,1.6rem);opacity:.9;animation:fadeSlide .8s .4s both}
+  @keyframes heroZoom{from{background-size:100%}to{background-size:115%}}
+  @keyframes fadeSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  
+  /* —— 双箭头 —— */
+  .down{position:relative;width:28px;height:42px;margin-top:12px;font-size:0;cursor:pointer;
+        animation:bounce 1.6s infinite,circleGlow 3s ease-in-out infinite}
+  .down::before,.down::after{content:"";position:absolute;left:50%;width:18px;height:18px;
+    border-bottom:3px solid #0ff;border-right:3px solid #0ff;transform:translateX(-50%) rotate(45deg);
+    box-shadow:0 0 8px rgba(0,255,255,.8)}
+  .down::before{top:4px}.down::after{top:16px}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+  @keyframes circleGlow{0%,100%{text-shadow:0 0 8px #0ff}50%{text-shadow:0 0 20px #0ff}}
+  
+  /* —— 第二屏 —— */
+  .sectionH{z-index:2;display:flex;align-items:center;justify-content:flex-start;overflow:hidden}
+  .sectionH::before{content:""}                   /* 不再放 jpg，可留空 */
+  
+  /* 背景视频 */
+  .bgVideo{position:fixed;inset:0;z-index:0;object-fit:cover;pointer-events:none;
+           opacity:0;transition:opacity .4s linear}
+  .sectionH.active .bgVideo{opacity:1}
+  
+  /* 顶部提示 */
+  .heading{position:absolute;top:3rem;left:50%;transform:translateX(-50%);
+           color:#fff;font-size:2.8rem;font-weight:600;text-shadow:0 0 12px #000;z-index:2}
+  @media(max-width:1024px){.heading{font-size:1.4rem}}
+  
+  /* 卡片横向滑动 */
+  .scroller{display:flex;align-items:center;z-index:1;transition:transform .001s linear}
+  .scroller{ gap:4rem; padding-inline:8vw; /* ← 左右各留 8vw 空隙 */ }   /* 原先用 margin-left，现在改 gap 更简洁 */
+  /* ===== 新卡片：自适应尺寸 + 高级动效 ===== */
+  .card{
+    position:relative; flex-shrink:0; overflow:hidden; border-radius:2.4rem;
+    width:clamp(320px, 65vw, 62rem);                  /* 随视口伸缩 */
+    aspect-ratio:4/2.5;                               /* 固定比例 */
+    transition:transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s;
+    text-decoration:none;                             /* 去 <a> 默认 */
+  }
+  .card img{
+    width:100%; height:100%; object-fit:cover; filter:brightness(.9);
+    transition:transform .6s ease;
+  }
+  
+  /* 底部信息栏：毛玻璃 + 渐变细边 */
+  .card .info{
+    position:absolute; inset:auto 0 0; padding:1.4rem 2rem;
+    background:rgba(0,0,0,.35); backdrop-filter:blur(8px) saturate(160%);
+    color:#fff; letter-spacing:.2px;
+    border-top:1px solid rgba(255,255,255,.12);
+    transition:transform .45s ease, opacity .45s;
+  }
+  .card .info h3{
+    margin:0 0 .4rem; font:700 1.6rem/1 'Bebas Neue',sans-serif;
+  }
+  .card .info p{
+    margin:0; font:400 0.9rem/1.4 'Inter',sans-serif; opacity:.82;
+  }
+  
+  /* ===== Hover 动效 ===== */
+  .card:hover{
+    transform:translateY(-10px);                      /* Lift */
+    box-shadow:0 18px 36px rgba(0,0,0,.35);
+  }
+  /* Glow-Ring */
+  .card::before{
+    content:""; position:absolute; inset:0; border-radius:inherit;
+    pointer-events:none; opacity:0;
+    background:linear-gradient(130deg, #0ff, #ff5bfd 60%, #fff700);
+    background-size:200% 200%; mix-blend-mode:screen;
+    transition:opacity .45s ease, background-position 2s linear;
+  }
+  .card:hover::before{
+    opacity:.9; background-position:100% 100%;
+  }
+  /* 图片轻微缩放 */
+  .card:hover img{ transform:scale(1.06); }
+  /* 信息栏上浮一点点 */
+  .card:hover .info{ transform:translateY(-6px); }
+  
+  
+  /* —— 第三屏 —— */
+  .section3{z-index:3;overflow:hidden}
+  .section3::before{content:""}    /* 无静态图 */
+  .bgVideo3{
+    position:fixed;inset:0;object-fit:cover;pointer-events:none;
+    opacity:0;transition:opacity .4s linear;z-index:0;
+  }
+  .section3.active .bgVideo3{opacity:1}
+  
+  /* 大号左侧文字 */
+  .heroLine{
+    position:absolute;left:8vw;top:60vh;      /* 初始在视口下半 */
+    width:32vw;max-width:600px;line-height:1.2;
+    font-family:'Orbitron',sans-serif;font-weight:800;
+    font-size:clamp(2rem,3vw,3.8rem);
+    color:#fff;text-shadow:0 0 10px rgba(0,0,0,.6);
+    transition:transform .001s linear;        /* 只靠 JS 改 transform */
+    z-index:2;
+  }
+  
+  /* —— 最后屏 —— */
+  .after{z-index:1;background:linear-gradient(#000,#111);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem}
+  
+  /* 鼠标视差 */
+  body.has-parallax #screen0{background-position:50% 50%;transition:background-position .15s linear}
+
+  /* === 新 GIF 屏 === */
+.sectionMid{z-index:3;overflow:hidden;background:#000}
+.bgGif {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;      /* 关键属性：铺满但保持比例 */
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s linear;
+}
+.sectionMid.active .bgGif {
+  opacity: 1;
+}
+
+/* 右侧滚动浮现文字 */
+.midLine{
+  position:absolute;right:8vw;bottom:-10vh;             /* 起点在视口下方 */
+  width:32vw;max-width:600px;line-height:1.3;
+  font-family:'Orbitron',sans-serif;font-weight:800;
+  font-size:clamp(1.8rem,3vw,3.4rem);
+  color:#fff;text-shadow:0 0 10px rgba(0,0,0,.6);
+  transform:translateY(40vh);                            /* 与 JS 插值配合 */
+  transition:transform .001s linear;
+  z-index:2;
+}
+
+/* === 升级后的结束屏 === */
+.after .ending{
+  text-align:center;line-height:1.4;max-width:90vw;padding:0 4vw;
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3vw,2.6rem);
+} 
+
+/* === SECTION 2 视频背景 === */
+.bgVideoMid{
+  position:fixed;inset:0;object-fit:cover;pointer-events:none;
+  width:100vw;height:100vh;
+  z-index:0;opacity:0;transition:opacity .4s linear;
+}
+.sectionMid.active .bgVideoMid{opacity:1}
