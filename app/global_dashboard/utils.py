@@ -5,18 +5,38 @@ import pickle
 import heapq
 from datetime import datetime
 from flask import current_app as app
-
+import easygraph as eg
+import psycopg2
+from psycopg2.extras import RealDictCursor
+import os
 def load_graph():
     """
-    从 pickle 文件中加载 EasyGraph 对象。
+    从 Supabase 的 PostgreSQL 数据库加载图数据，构建 EasyGraph 对象。
     """
-    pickle_path = app.config['GRAPH_PICKLE_PATH']
-    if not os.path.exists(pickle_path):
-        raise FileNotFoundError(f"Pickle 文件未找到，路径: {pickle_path}")
+    DB_URL = "postgresql://postgres:20050528qq@db.kmdpwddidasdolidornp.supabase.co:5432/postgres"  
 
-    with open(pickle_path, 'rb') as f:
-        graph = pickle.load(f)
-    return graph
+    conn = psycopg2.connect(DB_URL)
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+
+    G = eg.DiGraph()
+
+    # 1. 加载节点
+    cur.execute("SELECT * FROM graph.models_nodes;")
+    nodes = cur.fetchall()
+    for node in nodes:
+        node_id = node.pop('id')
+        G.add_node(node_id, **node)
+     # 2. 加载边
+    cur.execute("SELECT * FROM graph.models_edges;")
+    edges = cur.fetchall()
+    for edge in edges:
+        G.add_edge(edge['src'], edge['dst'], 
+                   type=edge.get('type', ''), 
+                   influence_weight=edge.get('influence_weight', 1.0))
+
+    cur.close()
+    conn.close()
+    return G
 
 """ save for future use.
 def generate_json(graph):

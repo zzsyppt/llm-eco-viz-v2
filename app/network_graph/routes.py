@@ -22,7 +22,7 @@ def network_view():
     base_model = request.args.get('base_model', 'meta-llama/Meta-Llama-3-70B')  # 设置默认的base_model 
     
     # 加载图对象
-    graph = load_graph(app.config['GRAPH_PICKLE_PATH'])
+    graph = load_graph()
     
     # 生成 head_html 和 body_html
     head_html, body_html = generate_graph_html(graph, base_model, view_type)

@@ -11,27 +11,47 @@ import json
 
 TOPK_K = 100  # 用于控制only top models的top数量（100） 
 
-def load_graph(pickle_path):
+import easygraph as eg
+import psycopg2
+from psycopg2.extras import RealDictCursor
+import os
+
+def load_graph():
     """
-    从 pickle 文件中加载 networkx 图对象。
-    
-    参数:
-    - pickle_path: pickle 文件的路径
-    
-    返回:
-    - graph: networkx 图对象
+    从 Supabase 的 PostgreSQL 数据库加载图数据，构建 EasyGraph 对象。
     """
-    with open(pickle_path, 'rb') as f:
-        graph = pickle.load(f)
-    return graph
+    DB_URL = "postgresql://postgres:20050528qq@db.kmdpwddidasdolidornp.supabase.co:5432/postgres"  
+
+    conn = psycopg2.connect(DB_URL)
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+
+    G = eg.DiGraph()
+
+    # 1. 加载节点
+    cur.execute("SELECT * FROM graph.models_nodes;")
+    nodes = cur.fetchall()
+    for node in nodes:
+        node_id = node.pop('id')
+        G.add_node(node_id, **node)
+     # 2. 加载边
+    cur.execute("SELECT * FROM graph.models_edges;")
+    edges = cur.fetchall()
+    for edge in edges:
+        G.add_edge(edge['src'], edge['dst'], 
+                   type=edge.get('type', ''), 
+                   influence_weight=edge.get('influence_weight', 1.0))
+
+    cur.close()
+    conn.close()
+    return G
 
 
 # 设置pyvis物理引擎参数
 def set_physics_options(net):
     # 供调试使用的button
-    net.show_buttons(filter_=['physics'])
+   # net.show_buttons(filter_=['physics'])
     # 设置物理引擎参数
-'''
+ 
     physics_options = {
         "physics": {
             "forceAtlas2Based": {
@@ -48,7 +68,7 @@ def set_physics_options(net):
     options_json = json.dumps(physics_options)
     # 设置选项
     net.set_options(options_json)
-'''
+ 
 
 # 动态生成背景颜色及文字颜色
 def calculate_color(value, max_value, color_start, color_end, text_color_light="#FFFFFF", text_color_dark="#333333"):
